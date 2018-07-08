@@ -71,7 +71,7 @@ $(window).on("window:resize", function(e) {
 });
 
 function main() {
-  establishConnection("localhost", 9999, (socket) => {
+  establishConnection("blinded.nyxcode.com", 9999, (socket) => {
     logIntoGame(socket, (game, thisPlayerID, otherPlayerID) => {
       socket.on("error", handleError);
       socket.on("enemy_turn",
