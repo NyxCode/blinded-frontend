@@ -1,0 +1,71 @@
+#ttt-matrix {
+  height: 0px;
+  width: 0px;
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: repeat(3, auto);
+  margin: auto;
+}
+
+#ttt-matrix>.ttt-cell {
+  background-color: #EEEEEE;
+}
+
+#ttt-cell-0-0 {
+  border-radius: 15px 0px 0px 0px;
+}
+
+#ttt-cell-0-2 {
+  border-radius: 0px 15px 0px 0px;
+}
+
+#ttt-cell-2-0 {
+  border-radius: 0px 0px 0px 15px;
+}
+
+#ttt-cell-2-2 {
+  border-radius: 0px 0px 15px 0px;
+}
+
+.symbol {
+  width: auto;
+  height: 100%;
+}
+
+#invite-player-popup {
+  color: #333;
+  position: absolute;
+  display: none;
+}
+
+#invite-player-description {
+  padding-top: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#invite-player-id {
+  margin-top: 20%;
+  font-family: "Lucida Console", Monaco, monospace;
+  overflow: auto;
+  word-wrap: break-word;
+  margin-left: 5%;
+  margin-right: 5%;
+  color: #555;
+}
+
+#your-turn>div {
+  display: none;
+  background-color: #EEE;
+  color: #333;
+  position: fixed;
+  left: 40vw;
+  bottom: 16%;
+  width: 20vw;
+  height: 5vh;
+  border-radius: 8px;
+}
+
+#your-turn-label {
+  line-height: 5vh;
+}
