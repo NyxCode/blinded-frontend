@@ -177,7 +177,7 @@ function handleError(errorData) {
 
 // Shows the full gameboard and ends the game by redirecting to the result page.
 function endGame(result, game, thisPlayerID, otherPlayerID) {
-  let gameBoard = game.data.board;
+  let gameBoard = game.board;
   gameRunning = false;
 
   // Show the game board
