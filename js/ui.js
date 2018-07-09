@@ -1,4 +1,7 @@
 $(window).on("load", main);
+$(window).resize(function() {
+  $(window).trigger("window:resize:pre");
+});
 
 const CELLSIZE = 17;
 const POPUP_SIZE = 3 * CELLSIZE;
@@ -6,24 +9,18 @@ const POPUP_SIZE = 3 * CELLSIZE;
 let SmallestViewportUnit = "vh";
 
 function main() {
-  $(window).resize(function() {
-    $(window).trigger("window:resize");
-  });
-
-  $(window).on("window:resize", function (e) {
+  $(window).on("window:resize:pre", function (e) {
     SmallestViewportUnit = $("body").height() < $("body").width() ? 'vh' : 'vw';
-  })
+    $(window).trigger("window:resize");
+    document.getElementById("hideAll").style.display = "none";
+  });
 
   // Disable image dragging
   $('img').on('dragstart', function(event) {
     event.preventDefault();
   });
 
-  $(window).trigger("window:resize");
-
-  setInterval(function() {
-    $(window).trigger("window:resize");
-  }, 1000);
+  $(window).trigger("window:resize:pre");
 }
 
 function resizeGameboard() {
