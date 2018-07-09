@@ -3,17 +3,22 @@ $(window).resize(function () {
     $(window).trigger("window:resize:pre");
 });
 
-const CELLSIZE = 17;
-const POPUP_SIZE = 3 * CELLSIZE;
+let POPUP_SIZE = 0;
+let CELLSIZE = 0;
+let BodyWidth = 0;
+let BodyHeight = 0;
 
 let SmallestViewportUnit = "vh";
 
 function main() {
     $(window).on("window:resize:pre", () => {
         let body = $("body");
-        SmallestViewportUnit = body.height() < body.width() ? 'vh' : 'vw';
+        BodyWidth = body.width();
+        BodyHeight = body.height();
+        POPUP_SIZE = getPopupSize(BodyWidth);
+        CELLSIZE = POPUP_SIZE / 3;
+        SmallestViewportUnit = BodyHeight < BodyWidth ? 'vh' : 'vw';
         $(window).trigger("window:resize");
-        document.getElementById("hideAll").style.display = "none";
     });
 
     // Disable image dragging
@@ -22,4 +27,14 @@ function main() {
     });
 
     $(window).trigger("window:resize:pre");
+    document.getElementById("hideAll").style.display = "none";
+}
+
+function getPopupSize(width) {
+    let minIn = 400;
+    let maxIn = 800;
+    let maxOut = 50;
+    let minOut = 80;
+    let value = Math.min(Math.max(width, minIn), maxIn);
+    return(value - minIn) * (maxOut - minOut) / (maxIn - minIn) + minOut;
 }

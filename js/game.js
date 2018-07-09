@@ -56,7 +56,8 @@ $(window).on("window:resize", () => {
     let matrixSize = POPUP_SIZE + unit;
     let symbolSize = CELLSIZE + unit;
     $('#ttt-matrix').width(matrixSize).height(matrixSize);
-    $('#your-turn').css("font-size", 3 + SmallestViewportUnit);
+    //$('#your-turn').css("font-size", 3 + SmallestViewportUnit);
+    //$('#your-turn > div').css("width", POPUP_SIZE + SmallestViewportUnit);
     $('.ttt-symbol').each(function (i, obj) {
         $(obj).css('width', symbolSize).css('height', symbolSize)
     });
@@ -70,6 +71,9 @@ $(window).on("window:resize", () => {
 function main() {
     establishConnection("blinded.nyxcode.com", 9999, (socket) => {
         logIntoGame(socket, (game, thisPlayerID, otherPlayerID) => {
+            $("#ttt-matrix").css("display", "grid");
+            updateNextTurn(game, thisPlayerID);
+
             socket.on("error", handleError);
             socket.on("enemy_turn",
                 (data) => handleEnemyTurn(data, thisPlayerID, game));
@@ -84,6 +88,14 @@ function main() {
             });
         });
     });
+}
+
+function updateNextTurn(game, thisPlayerID) {
+    if(game.nextTurn === thisPlayerID) {
+        $("#your-turn > div").css("display", "block");
+    } else {
+        $("#your-turn > div").css("display", "none");
+    }
 }
 
 function forEachCell(callback) {
@@ -108,16 +120,13 @@ function logIntoGame(socket, callback) {
         socket.emit("create_game", {}, (createdGame) => {
             console.log("Logged into game ", createdGame.id);
             $("#invite-player-popup").css("display", "initial");
-            $("#ttt-matrix").css("display", "none");
             $("#invite-player-id").text(createdGame.id);
             socket.on("player_joined", (playerJoined) => {
                 if(playerJoined.gameID !== createdGame.id) {
                     console.warn("Player joined, but wrong game.");
                     return;
                 }
-                $("#your-turn > div").css("display", "unset");
                 $("#invite-player-popup").css("display", "none");
-                $("#ttt-matrix").css("display", "grid");
                 callback(createdGame, createdGame.player1, playerJoined.player);
             });
         });
@@ -138,7 +147,6 @@ function logIntoGame(socket, callback) {
                 if (botPlayer.isError) {
                     handleError(botPlayer.description);
                 } else {
-                    $("#your-turn > div").css("display", "unset");
                     callback(createdGame, createdGame.player1, botPlayer.player);
                 }
             });
@@ -179,7 +187,7 @@ function handleEnemyTurn(turnData, thisPlayerID, game) {
     setTimeout(() => {
         cell.player = null;
         game.nextTurn = thisPlayerID;
-        $("#your-turn > div").css("display", "unset");
+        updateNextTurn(game, thisPlayerID);
     }, 2000);
 }
 
@@ -254,10 +262,10 @@ function cellClicked(x, y, game, socket, thisPlayerID, otherPlayerID) {
             return;
         }
 
-        $("#your-turn > div").css("display", "none");
-
         game.nextTurn = otherPlayerID;
         Cells[x][y].player = thisPlayer;
+
+        updateNextTurn(game, thisPlayerID);
 
         setTimeout(function () {
             if (gameRunning) {

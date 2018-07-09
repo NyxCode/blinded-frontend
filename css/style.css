@@ -67,10 +67,10 @@ body {
         float: right;
     }
 }
-
+/*
 .cover {
     padding: 0 1.5rem;
-}
+}*/
 
 .cover .btn-lg {
     padding: .75rem 1.25rem;
@@ -99,6 +99,7 @@ body {
     background-color: #EEE;
     position: absolute;
     margin: auto;
+    padding: 2%;
     top: 0;
     left: 0;
     bottom: 0;
@@ -168,4 +169,9 @@ footer a {
 h3 a:hover,
 footer a:hover {
     text-decoration: none;
+}
+
+.gray-btn {
+    background-color: #333;
+    border-color: #333;
 }

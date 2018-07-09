@@ -1,7 +1,7 @@
 #ttt-matrix {
     height: 0;
     width: 0;
-    display: grid;
+    display: none; /* changed by script later */
     grid-gap: 2px;
     grid-template-columns: repeat(3, auto);
     margin: auto;
@@ -59,12 +59,41 @@
     background-color: #EEE;
     color: #333;
     position: fixed;
-    left: 40vw;
+    left: 17.5%;
+    width: 65%;
     bottom: 16%;
-    width: 20vw;
     height: 5vh;
     border-radius: 8px;
 }
+
+@media screen and (min-width: 330px) {
+    #your-turn > div {
+        left: 30%;
+        width: 40%;
+    }
+}
+@media screen and (min-width: 430px) {
+    #your-turn > div {
+        left: 35%;
+        width: 30%;
+    }
+}
+@media screen and (min-width: 600px) {
+    #your-turn > div {
+        left: 40%;
+        width: 20%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #your-turn > div {
+        left: 45%;
+        width: 10%;
+    }
+}
+
+
+
 
 #your-turn-label {
     line-height: 5vh;
