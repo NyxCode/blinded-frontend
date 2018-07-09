@@ -172,7 +172,7 @@ function handleEnemyTurn(turnData, thisPlayerID, game) {
 // Handles a error
 function handleError(errorData) {
   let errorMessage = errorData.description;
-  alert("An unexpected error occured:\n" + errorMessage)
+  alert("An unexpected error occured:\n" + JSON.stringify(errorMessage));
 }
 
 // Shows the full gameboard and ends the game by redirecting to the result page.
