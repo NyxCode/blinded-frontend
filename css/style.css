@@ -164,3 +164,8 @@ body {
 footer a {
   color: rgba(255, 255, 255, .5) !important;
 }
+
+h3 a:hover,
+footer a:hover {
+  text-decoration: none;
+}
