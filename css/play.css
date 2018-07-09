@@ -1,19 +1,19 @@
 #singleplayer-btn {
-  top: 10%;
+    top: 10%;
 }
 
 #multiplayer-btn {
-  bottom: 10%;
+    bottom: 10%;
 }
 
 .gamemode-btn {
-  position: absolute;
-  height: 35%;
-  width: 80%;
-  left: 10%;
+    position: absolute;
+    height: 35%;
+    width: 80%;
+    left: 10%;
 
-  /* center label */
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+    /* center label */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

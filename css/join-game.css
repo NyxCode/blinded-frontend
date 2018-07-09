@@ -1,16 +1,16 @@
 #game-id-form {
-  margin-top: 38%;
-  top: 60%;
+    margin-top: 38%;
+    top: 60%;
 }
 
 #game-id-field {
-  width: 80%;
-  height: 40%;
-  resize: none;
-  text-align: center;
+    width: 80%;
+    height: 40%;
+    resize: none;
+    text-align: center;
 }
 
 #confirm-button {
-  height: 20%;
-  width: 80%;
+    height: 20%;
+    width: 80%;
 }
