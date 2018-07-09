@@ -199,7 +199,6 @@ function endGame(result, game, thisPlayerID, otherPlayerID) {
 
 // Handles a disqualification of the local player
 function handleDisqualification(disqualifiedData, thisPlayerID, otherPlayerID) {
-  playSound("audio/error.wav");
   endGame("disqualified", disqualifiedData.game, thisPlayerID, otherPlayerID);
 }
 
@@ -208,13 +207,10 @@ function handleGameCompletion(completionData, thisPlayerID, otherPlayerID) {
   let game = completionData.game;
   let winner = game.info.winner;
   if (winner == thisPlayerID) {
-    playSound("audio/victory.wav");
     endGame("won", game, thisPlayerID, otherPlayerID);
   } else if (winner == otherPlayerID) {
-    playSound("audio/defeat.wav");
     endGame("lost", game, thisPlayerID, otherPlayerID);
   } else {
-    playSound("audio/defeat.wav");
     endGame("draw", game, thisPlayerID, otherPlayerID);
   }
 }
@@ -242,7 +238,6 @@ function cellClicked(x, y, game, socket, thisPlayerID, otherPlayerID) {
     let error = doTurnData.description;
     if (error != undefined) {
       alert("error: " + error)
-      playSound("audio/error.wav");
       return;
     }
 
