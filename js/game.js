@@ -127,8 +127,8 @@ function logIntoGame(socket, callback) {
       console.log("Logged into game ", createdGame.id);
       socket.emit("request_bot", {id: createdGame.id}, (botPlayer) => {
         console.log("received bot: " + JSON.stringify(botPlayer));
-        if(botPlayer.description != null) {
-          handleError(botPlayer);
+        if(botPlayer.isError) {
+          handleError(botPlayer.description);
         } else {
           $("#your-turn > div").css("display", "unset");
           callback(createdGame, createdGame.player1, botPlayer.player);
@@ -170,9 +170,8 @@ function handleEnemyTurn(turnData, thisPlayerID, game) {
 }
 
 // Handles a error
-function handleError(errorData) {
-  let errorMessage = errorData.description;
-  alert("An unexpected error occured:\n" + JSON.stringify(errorMessage));
+function handleError(errorMessage) {
+  alert("An unexpected error occured:\n" + errorMessage);
 }
 
 // Shows the full gameboard and ends the game by redirecting to the result page.
