@@ -80,8 +80,6 @@ body {
   color: rgba(255, 255, 255, .5);
 }
 
-
-
 .no-select {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -147,6 +145,7 @@ body {
   color: #333;
   padding-top: 10%;
   font-weight: bolder;
+  text-shadow: none;
 }
 
 #hideAll {
