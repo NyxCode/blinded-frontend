@@ -111,6 +111,10 @@ function logIntoGame(socket, callback) {
             $("#ttt-matrix").css("display", "none");
             $("#invite-player-id").text(createdGame.id);
             socket.on("player_joined", (playerJoined) => {
+                if(playerJoined.gameID !== createdGame.id) {
+                    console.warn("Player joined, but wrong game.");
+                    return;
+                }
                 $("#your-turn > div").css("display", "unset");
                 $("#invite-player-popup").css("display", "none");
                 $("#ttt-matrix").css("display", "grid");
@@ -125,6 +129,11 @@ function logIntoGame(socket, callback) {
             socket.emit("request_bot", {
                 id: createdGame.id
             }, (botPlayer) => {
+                if(botPlayer.gameID !== createdGame.id) {
+                    handleError("No bot could join your game - please try it again later");
+                    window.location.replace("/multiplayer.html");
+                    return;
+                }
                 console.log("received bot: " + JSON.stringify(botPlayer));
                 if (botPlayer.isError) {
                     handleError(botPlayer.description);
