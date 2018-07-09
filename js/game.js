@@ -112,7 +112,8 @@ function logIntoGame(socket, callback) {
       console.log("Logged into game ", createdGame.id);
       $("#invite-player-popup").css("display", "initial")
       $("#ttt-matrix").css("display", "none");
-      $("#invite-player-id").append(createdGame.id);
+      $("#invite-player-id").text(createdGame.id);
+      let alreadyJoined = false;
       socket.on("player_joined", (playerJoined) => {
         $("#your-turn > div").css("display", "unset");
         $("#invite-player-popup").css("display", "none");
