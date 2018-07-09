@@ -113,7 +113,6 @@ function logIntoGame(socket, callback) {
       $("#invite-player-popup").css("display", "initial")
       $("#ttt-matrix").css("display", "none");
       $("#invite-player-id").text(createdGame.id);
-      let alreadyJoined = false;
       socket.on("player_joined", (playerJoined) => {
         $("#your-turn > div").css("display", "unset");
         $("#invite-player-popup").css("display", "none");
@@ -126,9 +125,11 @@ function logIntoGame(socket, callback) {
   function createWithBot(socket, callback) {
     socket.emit("create_game", {}, (createdGame) => {
       console.log("Logged into game ", createdGame.id);
-      socket.emit("request_bot", {id: createdGame.id}, (botPlayer) => {
+      socket.emit("request_bot", {
+        id: createdGame.id
+      }, (botPlayer) => {
         console.log("received bot: " + JSON.stringify(botPlayer));
-        if(botPlayer.isError) {
+        if (botPlayer.isError) {
           handleError(botPlayer.description);
         } else {
           $("#your-turn > div").css("display", "unset");
@@ -142,7 +143,12 @@ function logIntoGame(socket, callback) {
     socket.emit("join_game", {
       id: gameID
     }, (createdGame) => {
-      callback(createdGame, createdGame.player2, createdGame.player1);
+      if (createdGame.isError) {
+        handleError(createdGame.description);
+        window.location.replace("/");
+      } else {
+        callback(createdGame, createdGame.player2, createdGame.player1);
+      }
     });
   }
 
@@ -172,7 +178,7 @@ function handleEnemyTurn(turnData, thisPlayerID, game) {
 
 // Handles a error
 function handleError(errorMessage) {
-  alert("An unexpected error occured:\n" + errorMessage);
+  alert("An error occured:\n" + errorMessage);
 }
 
 // Shows the full gameboard and ends the game by redirecting to the result page.
