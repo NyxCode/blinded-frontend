@@ -143,6 +143,7 @@ function logIntoGame(socket, callback) {
     socket.emit("join_game", {
       id: gameID
     }, (createdGame) => {
+      console.log(JSON.stringify(createdGame));
       if (createdGame.isError) {
         handleError(createdGame.description);
         window.location.replace("/");
