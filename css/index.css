@@ -1,19 +1,46 @@
-#singleplayer-btn {
-  top: 10%;
+#game-description:before {
+  content: "Blinded is a fun game made for improving your short-term memory. It's satisfying yet challenging to play, so what are you waiting for?"
 }
 
-#multiplayer-btn {
-  bottom: 10%;
+@media screen and (max-width: 380px) {
+  #game-description:before {
+    content: "Blinded is a fun yet challenging game made for improving your short-term memory.";
+  }
 }
 
-.gamemode-btn {
-  position: absolute;
-  height: 35%;
-  width: 80%;
-  left: 10%;
+#game-description {
+  margin-bottom: 2%;
+  color: #DDD;
+}
 
-  /* center label */
+#statistics {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 4% 20% 8% 20%;
+}
+
+
+@media screen and (max-width: 430px) {
+  #statistics {
+    padding: 5% 0 8% 0%;
+  }
+}
+
+#statistics-column-left {
+  margin-right: 5%;
+}
+
+#statistics-column-right {
+  margin-left: 5%;
+}
+
+.statistics-number {
+  font-weight: bold;
+  font-size: 1.5em;
+  color: #EEE;
+}
+
+.statistics-description {
+  color: #BBB;
 }

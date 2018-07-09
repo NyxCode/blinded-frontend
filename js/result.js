@@ -11,8 +11,6 @@ $(window).on("window:resize", function(e) {
 });
 
 function main() {
-
-
   $("#result").append(msg.msg);
 }
 
