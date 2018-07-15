@@ -64,11 +64,38 @@ $(window).on("window:resize", () => {
     $("#invite-player-popup")
         .width(POPUP_SIZE + SmallestViewportUnit)
         .height(POPUP_SIZE + SmallestViewportUnit);
-    $("#invite-player-id").css("font-size", 3.5 + SmallestViewportUnit);
-    $("#invite-player-description").css("font-size", 4 + SmallestViewportUnit);
+    $("#invite-id").css("font-size", 9 + SmallestViewportUnit);
+    $("#invite-desc").css("font-size", getDescSize() + SmallestViewportUnit);
+
+    /*
+
+        $("#invite-player-id").css("font-size", 3.5 + SmallestViewportUnit);
+        $("#invite-player-description").css("font-size", 4 + SmallestViewportUnit); */
 });
 
+function getDescSize() {
+    let body = $("body");
+    let height = body.height();
+    let width = body.width();
+    let ratio = height / width;
+    if(ratio >= 1.7) {
+        return 7.5;
+    } else {
+        return 4.5;
+    }
+}
+
+function createShareButton(gameID) {
+    if(isMobile) {
+        let msg = "Hey! Are you ready for a game? Try to beat me at http://blinded.nyxcode.com/game.html?mode=multiplayer&id=" + gameID;
+        $("#invite-id").click(() => {
+            window.open("https://wa.me/?text=" + encodeURI(msg));
+        });
+    }
+}
+
 function main() {
+    createShareButton();
     establishConnection("blinded.nyxcode.com", 9999, (socket) => {
         logIntoGame(socket, (game, thisPlayerID, otherPlayerID) => {
             $("#ttt-matrix").css("display", "grid");
@@ -91,7 +118,7 @@ function main() {
 }
 
 function updateNextTurn(game, thisPlayerID) {
-    if(game.nextTurn === thisPlayerID) {
+    if (game.nextTurn === thisPlayerID) {
         $("#your-turn > div").css("display", "block");
     } else {
         $("#your-turn > div").css("display", "none");
@@ -120,9 +147,10 @@ function logIntoGame(socket, callback) {
         socket.emit("create_game", {}, (createdGame) => {
             console.log("Logged into game ", createdGame.id);
             $("#invite-player-popup").css("display", "initial");
-            $("#invite-player-id").text(createdGame.id);
+            $("#invite-id").text(createdGame.id);
+            createShareButton(createdGame.id);
             socket.on("player_joined", (playerJoined) => {
-                if(playerJoined.gameID !== createdGame.id) {
+                if (playerJoined.gameID !== createdGame.id) {
                     console.warn("Player joined, but wrong game.");
                     return;
                 }
@@ -138,7 +166,7 @@ function logIntoGame(socket, callback) {
             socket.emit("request_bot", {
                 id: createdGame.id
             }, (botPlayer) => {
-                if(botPlayer.gameID !== createdGame.id) {
+                if (botPlayer.gameID !== createdGame.id) {
                     handleError("No bot could join your game - please try it again later");
                     window.location.replace("/multiplayer.html");
                     return;
@@ -257,7 +285,7 @@ function cellClicked(x, y, game, socket, thisPlayerID, otherPlayerID) {
             return;
         }
 
-        if(doTurnData.isError) {
+        if (doTurnData.isError) {
             handleError(doTurnData.description);
             return;
         }

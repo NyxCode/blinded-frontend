@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Blinded</title>
@@ -28,9 +29,17 @@
     </header>
     <main role="main" class="inner cover">
         <div id="invite-player-popup" class="popup">
-            <p id="invite-player-description">Share the following ID with someone you'd like to play against.</p>
-            <p id="invite-player-id" class="force-select"></p>
+            <div id="invite-player-content">
+                <div id="invite-desc-wrapper">
+                    <span id="invite-desc">Share the following ID with someone you'd like to play
+                        against.</span>
+                </div>
+                <div id="invite-id-wrapper">
+                    <span id="invite-id" class="force-select"></span>
+                </div>
+            </div>
         </div>
+
         <div id="ttt-matrix">
             <div class="ttt-cell" id="ttt-cell-0-0"><img class="ttt-symbol" id="s-0-0" alt="" src="img/blank.gif"></div>
             <div class="ttt-cell" id="ttt-cell-0-1"><img class="ttt-symbol" id="s-0-1" alt="" src="img/blank.gif"></div>

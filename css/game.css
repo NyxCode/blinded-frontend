@@ -38,22 +38,6 @@
     display: none;
 }
 
-#invite-player-description {
-    padding-top: 10%;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-#invite-player-id {
-    margin-top: 20%;
-    font-family: 'Source Code Pro', monospace;
-    overflow: auto;
-    word-wrap: break-word;
-    margin-left: 5%;
-    margin-right: 5%;
-    color: #555;
-}
-
 #your-turn > div {
     display: none;
     background-color: #EEE;
@@ -72,12 +56,14 @@
         width: 40%;
     }
 }
+
 @media screen and (min-width: 430px) {
     #your-turn > div {
         left: 35%;
         width: 30%;
     }
 }
+
 @media screen and (min-width: 600px) {
     #your-turn > div {
         left: 40%;
@@ -92,9 +78,35 @@
     }
 }
 
-
-
-
 #your-turn-label {
     line-height: 5vh;
 }
+
+
+
+#invite-player-content {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+#invite-desc-wrapper {
+    margin-top: 2%;
+}
+
+#invite-id-wrapper {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    text-align: center;
+    width: 100%;
+}
+
+#invite-id {
+    background-color: #333333;
+    color: #EEEEEE;
+    padding: 2% 2% 2% 2%;
+    border-radius: 10px;
+}
+
+
