@@ -82,6 +82,7 @@ body {
 }
 
 .no-select {
+    -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -89,9 +90,10 @@ body {
 }
 
 .force-select {
+    -webkit-touch-callout: default;
     -webkit-user-select: all;
     -moz-user-select: all;
-    -ms-user-select: all;
+    -ms-user-select: text;
     user-select: all;
 }
 
