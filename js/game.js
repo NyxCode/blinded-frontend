@@ -86,16 +86,16 @@ function getDescSize() {
 }
 
 function createShareButton(gameID) {
-    if(isMobile) {
-        let msg = "Hey! Are you ready for a game? Try to beat me at http://blinded.nyxcode.com/game.html?mode=multiplayer&id=" + gameID;
+    if(!isMobile) {
+        let link = encodeURIComponent("http://blinded.nyxcode.com/game.html?mode=multiplayer&id=" + gameID);
+        let msg = "Hey! Are you ready for a game? Try to beat me at ";
         $("#invite-id").click(() => {
-            window.open("https://wa.me/?text=" + encodeURI(msg));
+            window.open("https://wa.me/?text=" + encodeURI(msg) + link);
         });
     }
 }
 
 function main() {
-    createShareButton();
     establishConnection("blinded.nyxcode.com", 9999, (socket) => {
         logIntoGame(socket, (game, thisPlayerID, otherPlayerID) => {
             $("#ttt-matrix").css("display", "grid");
