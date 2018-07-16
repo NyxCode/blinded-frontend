@@ -45,7 +45,7 @@
     position: fixed;
     left: 17.5%;
     width: 65%;
-    bottom: 16%;
+    bottom: 12%;
     height: 5vh;
     border-radius: 8px;
 }
@@ -77,6 +77,22 @@
         width: 10%;
     }
 }
+
+
+@media screen and (min-height: 650px) {
+    #your-turn > div {
+        bottom: 16%;
+    }
+}
+@media screen and (max-height: 550px) {
+    #your-turn > div {
+        bottom: 5%;
+    }
+    footer {
+        visibility: hidden;
+    }
+}
+
 
 #your-turn-label {
     line-height: 5vh;
