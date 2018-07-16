@@ -78,27 +78,21 @@
     }
 }
 
-
 @media screen and (min-height: 650px) {
     #your-turn > div {
         bottom: 16%;
     }
 }
+
 @media screen and (max-height: 550px) {
     #your-turn > div {
         bottom: 5%;
     }
-    footer {
-        visibility: hidden;
-    }
 }
-
 
 #your-turn-label {
     line-height: 5vh;
 }
-
-
 
 #invite-player-content {
     display: flex;

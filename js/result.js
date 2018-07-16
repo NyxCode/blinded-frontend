@@ -35,5 +35,5 @@ function getFontSize(s) {
     let maxOut = 4;
     let minOut = 6.5;
     let value = Math.min(Math.max(s, minIn), maxIn);
-    return(value - minIn) * (maxOut - minOut) / (maxIn - minIn) + minOut;
+    return (value - minIn) * (maxOut - minOut) / (maxIn - minIn) + minOut;
 }

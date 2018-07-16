@@ -66,11 +66,6 @@ $(window).on("window:resize", () => {
         .height(POPUP_SIZE + SmallestViewportUnit);
     $("#invite-id").css("font-size", 9 + SmallestViewportUnit);
     $("#invite-desc").css("font-size", getDescSize() + SmallestViewportUnit);
-
-    /*
-
-        $("#invite-player-id").css("font-size", 3.5 + SmallestViewportUnit);
-        $("#invite-player-description").css("font-size", 4 + SmallestViewportUnit); */
 });
 
 function getDescSize() {
@@ -78,7 +73,7 @@ function getDescSize() {
     let height = body.height();
     let width = body.width();
     let ratio = height / width;
-    if(ratio >= 1.7) {
+    if (ratio >= 1.7) {
         return 7.5;
     } else {
         return 4.5;
@@ -86,7 +81,7 @@ function getDescSize() {
 }
 
 function createShareButton(gameID) {
-    if(!isMobile) {
+    if (isMobile) {
         let link = encodeURIComponent("http://blinded.nyxcode.com/game.html?mode=multiplayer&id=" + gameID);
         let msg = "Hey! Are you ready for a game? Try to beat me at ";
         $("#invite-id").click(() => {
