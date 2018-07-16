@@ -2,12 +2,12 @@ import $ from "jquery";
 import "../html/play.html"
 import "../css/style.css"
 import "../css/play.css"
-import {POPUP_SIZE, SmallestViewportUnit} from "./ui.js";
+import {PopupSize, SmallestViewportUnit} from "./ui.js";
 
 $(window).on("window:resize", () => {
-    let size = POPUP_SIZE + SmallestViewportUnit;
+    let size = PopupSize + SmallestViewportUnit;
     let fontSize = 5 + SmallestViewportUnit;
-    $("#get-started").width(size).height(size);
+    $("#get-started").css("width", size).css("height", size);
     $("#singleplayer-btn").css("font-size", fontSize);
     $("#multiplayer-btn").css("font-size", fontSize);
 });

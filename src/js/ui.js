@@ -1,39 +1,35 @@
 import $ from "jquery";
 import "../css/style.css"
 
-let POPUP_SIZE = 0;
-let CELLSIZE = 0;
+let PopupSize = 0;
+let CellSize = 0;
 let BodyHeight = 0;
 let BodyWidth = 0;
 let SmallestViewportUnit = "vh";
 
-export {POPUP_SIZE, CELLSIZE, BodyHeight, BodyWidth, SmallestViewportUnit};
+export {PopupSize, CellSize, BodyHeight, BodyWidth, SmallestViewportUnit};
 
-$(window).on("load", main);
+$(window).resize(() => $(window).trigger("window:resize:pre"));
 
-$(window).resize(function () {
-    $(window).trigger("window:resize:pre");
+$(window).on("window:resize:pre", () => {
+    updateGlobalVars();
+    $(window).trigger("window:resize");
 });
 
-function main() {
-    $(window).on("window:resize:pre", () => {
-        let body = $("body");
-        BodyWidth = body.width();
-        BodyHeight = body.height();
-        POPUP_SIZE = getPopupSize(BodyWidth);
-        CELLSIZE = POPUP_SIZE / 3;
-        SmallestViewportUnit = BodyHeight < BodyWidth ? 'vh' : 'vw';
-        console.log(SmallestViewportUnit);
-        $(window).trigger("window:resize");
-    });
-
-    // Disable image dragging
-    $('img').on('dragstart', function (event) {
-        event.preventDefault();
-    });
+$(window).on("load", () => {
+    $('img').on('dragstart', event => event.preventDefault());
 
     $(window).trigger("window:resize:pre");
     document.getElementById("hideAll").style.display = "none";
+});
+
+function updateGlobalVars() {
+    let body = $("body");
+    BodyWidth = body.width();
+    BodyHeight = body.height();
+    PopupSize = getPopupSize(BodyWidth);
+    CellSize = PopupSize / 3;
+    SmallestViewportUnit = BodyHeight < BodyWidth ? 'vh' : 'vw';
 }
 
 function getPopupSize(width) {
