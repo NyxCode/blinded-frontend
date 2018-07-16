@@ -1,0 +1,35 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist ; mkdir dist ; webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blinded-game/blinded-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blinded-game/blinded-frontend/issues"
+  },
+  "homepage": "https://github.com/blinded-game/blinded-frontend#readme",
+  "devDependencies": {
+    "css-loader": "^1.0.0",
+    "file-loader": "^1.1.11",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.1.2",
+    "jquery": "^3.3.1",
+    "jsdom": "^11.11.0",
+    "mobile-detect": "^1.4.2",
+    "popper.js": "^1.14.3",
+    "socket.io-client": "^2.1.1",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
