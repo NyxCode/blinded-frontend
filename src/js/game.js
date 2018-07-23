@@ -1,3 +1,18 @@
+import $ from "jquery";
+import io from 'socket.io-client';
+import MobileDetect from "mobile-detect";
+import {PopupSize, CellSize, SmallestViewportUnit, BodyHeight, BodyWidth} from "./ui.js";
+import "../css/style.css"
+import "../css/game.css"
+import "../html/game.html"
+import BlankImage from "../img/blank.gif";
+import CircleAnimation from "../img/circle.gif";
+import CircleImage from "../img/circle.png";
+import CrossAnimation from "../img/cross.gif";
+import CrossImage from "../img/cross.png";
+import PencilSound1 from "../audio/pencil1.mp3"
+import PencilSound2 from "../audio/pencil2.mp3"
+
 class Player {
     constructor(symbol, animation, sound) {
         this.symbol = symbol;
@@ -10,7 +25,7 @@ class Cell {
     constructor(x, y) {
         this.cell = $("#ttt-cell-" + y + "-" + x);
         this.image = $("#s-" + y + "-" + x);
-        this._player = null;
+        this.player = null;
     }
 
     get player() {
@@ -33,7 +48,7 @@ class Cell {
             }, 500);
             this.playSoundEffect();
         } else {
-            image.attr("src", "img/blank.gif");
+            image.attr("src", BlankImage);
         }
     }
 }
@@ -44,8 +59,8 @@ const Cells = [
     [new Cell(2, 0), new Cell(2, 1), new Cell(2, 2)]
 ];
 
-const thisPlayer = new Player("img/circle.png", "img/circle.gif", "audio/pencil1.mp3"); // #7986cb
-const otherPlayer = new Player("img/cross.png", "img/cross.gif", "audio/pencil2.mp3"); // #e57373
+const thisPlayer = new Player(CircleImage, CircleAnimation, PencilSound1); // #7986cb
+const otherPlayer = new Player(CrossImage, CrossAnimation, PencilSound2); // #e57373
 
 let gameRunning = true;
 
@@ -53,40 +68,31 @@ $(document).ready(main);
 
 $(window).on("window:resize", () => {
     let unit = SmallestViewportUnit;
-    let matrixSize = POPUP_SIZE + unit;
-    let symbolSize = CELLSIZE + unit;
+    let matrixSize = PopupSize + unit;
+    let symbolSize = CellSize + unit;
     $('#ttt-matrix').width(matrixSize).height(matrixSize);
     //$('#your-turn').css("font-size", 3 + SmallestViewportUnit);
-    //$('#your-turn > div').css("width", POPUP_SIZE + SmallestViewportUnit);
+    //$('#your-turn > div').css("width", PopupSize + SmallestViewportUnit);
     $('.ttt-symbol').each(function (i, obj) {
         $(obj).css('width', symbolSize).css('height', symbolSize)
     });
     $("#invite-player-popup")
-        .width(POPUP_SIZE + SmallestViewportUnit)
-        .height(POPUP_SIZE + SmallestViewportUnit);
+        .width(PopupSize + SmallestViewportUnit)
+        .height(PopupSize + SmallestViewportUnit);
     $("#invite-id").css("font-size", 9 + SmallestViewportUnit);
-    $("#invite-desc").css("font-size", getDescSize() + SmallestViewportUnit);
+
+    let descriptionSize = (BodyHeight / BodyWidth >= 1.7) ? 7.5 : 4.5;
+    $("#invite-desc").css("font-size", descriptionSize + SmallestViewportUnit);
 });
 
-function getDescSize() {
-    let body = $("body");
-    let height = body.height();
-    let width = body.width();
-    let ratio = height / width;
-    if (ratio >= 1.7) {
-        return 7.5;
-    } else {
-        return 4.5;
-    }
-}
-
 function createShareButton(gameID) {
-    if (isMobile) {
-        let link = encodeURIComponent("http://blinded.nyxcode.com/game.html?mode=multiplayer&id=" + gameID);
-        let msg = "Hey! Are you ready for a game? Try to beat me at ";
-        $("#invite-id").click(() => {
-            window.open("https://wa.me/?text=" + encodeURI(msg) + link);
-        });
+    let onMobile = new MobileDetect(window.navigator.userAgent).mobile();
+    console.log("mobile: ", onMobile);
+
+    if (onMobile) {
+        let target = encodeURIComponent("http://blinded.nyxcode.com/game.html?mode=multiplayer&id=" + gameID);
+        let link = "https://wa.me/?text=" + encodeURI("Hey! Are you ready for a game? Try to beat me at ") + target;
+        $("#invite-id").click(() => window.open(link));
     }
 }
 
@@ -97,17 +103,13 @@ function main() {
             updateNextTurn(game, thisPlayerID);
 
             socket.on("error", handleError);
-            socket.on("enemy_turn",
-                (data) => handleEnemyTurn(data, thisPlayerID, game));
-            socket.on("disqualified",
-                (data) => handleDisqualification(data, thisPlayerID, otherPlayerID));
-            socket.on("game_completed",
-                (data) => handleGameCompletion(data, thisPlayerID, otherPlayerID));
+            socket.on("enemy_turn", data => handleEnemyTurn(data, thisPlayerID, game));
+            socket.on("disqualified", data => handleDisqualification(data, thisPlayerID, otherPlayerID));
+            socket.on("game_completed", data => handleGameCompletion(data, thisPlayerID, otherPlayerID));
 
-            forEachCell((x, y, cell) => {
-                cell.cell.click(() => cellClicked(
-                    x, y, game, socket, thisPlayerID, otherPlayerID));
-            });
+            forEachCell((x, y, cell) =>
+                cell.cell.click(() => cellClicked(x, y, game, socket, thisPlayerID, otherPlayerID))
+            );
         });
     });
 }
@@ -179,26 +181,35 @@ function logIntoGame(socket, callback) {
     function join(socket, gameID, callback) {
         socket.emit("join_game", {
             id: gameID
-        }, (createdGame) => {
-            console.log(JSON.stringify(createdGame));
+        }, createdGame => {
             if (createdGame.isError) {
-                handleError(createdGame.description);
-                window.location.replace("/");
+                handleError(createdGame.description, true);
             } else {
                 callback(createdGame, createdGame.player2, createdGame.player1);
             }
         });
     }
 
-    let url = new URL(window.location.href);
-    let mode = url.searchParams.get("mode");
-    let gameID = url.searchParams.get("id");
-    if (mode === "singleplayer") {
-        createWithBot(socket, callback);
-    } else if (gameID == null) {
-        create(socket, callback);
-    } else {
-        join(socket, gameID, callback);
+    let params = new URL(window.location.href).searchParams;
+    let mode = params.get("mode");
+    let gameID = params.get("id");
+
+    switch (mode) {
+        case "singleplayer":
+            createWithBot(socket, callback);
+            break;
+
+        case "multiplayer":
+            if (gameID) {
+                join(socket, gameID, callback);
+            } else {
+                create(socket, callback);
+            }
+            break;
+
+        default:
+            handleError("The current URL is invalid", true);
+            break;
     }
 }
 
@@ -215,8 +226,11 @@ function handleEnemyTurn(turnData, thisPlayerID, game) {
 }
 
 // Handles a error
-function handleError(errorMessage) {
+function handleError(errorMessage, exit) {
     alert("An error occurred:\n" + errorMessage);
+    if(exit) {
+        window.location.replace("/");
+    }
 }
 
 // Shows the full board and ends the game by redirecting to the result page.
@@ -290,7 +304,7 @@ function cellClicked(x, y, game, socket, thisPlayerID, otherPlayerID) {
 
         updateNextTurn(game, thisPlayerID);
 
-        setTimeout(function () {
+        setTimeout(() => {
             if (gameRunning) {
                 Cells[x][y].player = null;
             }

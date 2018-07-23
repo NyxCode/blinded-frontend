@@ -1,16 +1,17 @@
-$(document).ready(main);
+import $ from "jquery";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {PopupSize, SmallestViewportUnit, BodyWidth, BodyHeight} from "./ui.js";
+import "../css/style.css"
+import "../html/result.html"
+
+$(document).ready(() => $("#result").append(getResult()));
 
 $(window).on("window:resize", () => {
-    $("#message")
-        .width(POPUP_SIZE + SmallestViewportUnit)
-        .height(POPUP_SIZE + SmallestViewportUnit);
+    let size = PopupSize + SmallestViewportUnit;
+    $("#message").css("width", size).css("height", size);
     $("#play-again-btn").css("font-size", 5 + SmallestViewportUnit);
     $("#result").css("font-size", getFontSize(Math.min(BodyWidth, BodyHeight)) + SmallestViewportUnit);
 });
-
-function main() {
-    $("#result").append(getResult());
-}
 
 function getResult() {
     let url = new URL(window.location.href);
