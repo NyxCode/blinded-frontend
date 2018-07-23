@@ -16,11 +16,18 @@ $(window).on("window:resize:pre", () => {
     $(window).trigger("window:resize");
 });
 
+
+let completelyLoaded = false;
+$(window).on("window:resize", () => {
+    if(!completelyLoaded) {
+        completelyLoaded = true;
+        document.getElementById("hideAll").style.display = "none";
+    }
+});
+
 $(window).on("load", () => {
     $('img').on('dragstart', event => event.preventDefault());
-
     $(window).trigger("window:resize:pre");
-    document.getElementById("hideAll").style.display = "none";
 });
 
 function updateGlobalVars() {
