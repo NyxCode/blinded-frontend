@@ -19,9 +19,12 @@ $(window).on("window:resize:pre", () => {
 
 let completelyLoaded = false;
 $(window).on("window:resize", () => {
-    if(!completelyLoaded) {
+    if (!completelyLoaded) {
         completelyLoaded = true;
-        document.getElementById("hideAll").style.display = "none";
+        setTimeout(() => {
+            document.getElementById("hideAll").style.display = "none";
+            console.log("visible now!");
+        }, 0);
     }
 });
 
