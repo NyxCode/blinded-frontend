@@ -25,6 +25,7 @@ html, body {
 body {
     display: -ms-flexbox;
     display: flex;
+    color: #fff;
 }
 
 .cover-container {
@@ -69,11 +70,6 @@ body {
         float: right;
     }
 }
-
-/*
-.cover {
-    padding: 0 1.5rem;
-}*/
 
 .cover .btn-lg {
     padding: .75rem 1.25rem;
@@ -125,13 +121,6 @@ body {
     right: 10%;
     bottom: 10%;
 }
-
-/*
-.btn {
-	  background-color: #333;
-	  border-color: #333;
-	  font-size: 1em;
-}*/
 
 .big-button {
     position: absolute;
