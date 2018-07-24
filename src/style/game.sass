@@ -1,0 +1,96 @@
+@import colors
+
+#ttt-matrix
+  height: 0
+  width: 0
+  display: none
+  grid-gap: 2px
+  grid-template-columns: repeat(3, auto)
+  margin: auto
+
+.ttt-cell
+  background-color: $color-light-gray
+
+#ttt-cell-0-0
+  border-radius: 15px 0 0 0
+
+#ttt-cell-0-2
+  border-radius: 0 15px 0 0
+
+#ttt-cell-2-0
+  border-radius: 0 0 0 15px
+
+#ttt-cell-2-2
+  border-radius: 0 0 15px 0
+
+.symbol
+  width: auto
+  height: 100%
+
+#invite-player-popup
+  color: $color-dark-gray
+  position: absolute
+  display: none
+
+#your-turn > div
+  display: none
+  background-color: $color-light-gray
+  color: $color-dark-gray
+  position: fixed
+  left: 17.5%
+  width: 65%
+  bottom: 12%
+  height: 5vh
+  border-radius: 8px
+
+@media screen and (min-width: 330px)
+  #your-turn > div
+    left: 30%
+    width: 40%
+
+@media screen and (min-width: 430px)
+  #your-turn > div
+    left: 35%
+    width: 30%
+
+@media screen and (min-width: 600px)
+  #your-turn > div
+    left: 40%
+    width: 20%
+
+@media screen and (min-width: 1200px)
+  #your-turn > div
+    left: 45%
+    width: 10%
+
+@media screen and (min-height: 650px)
+  #your-turn > div
+    bottom: 16%
+
+@media screen and (max-height: 550px)
+  #your-turn > div
+    bottom: 5%
+
+#your-turn-label
+  line-height: 5vh
+
+#invite-player-content
+  display: flex
+  flex-direction: column
+  align-content: space-between
+
+#invite-desc-wrapper
+  margin-top: 2%
+
+#invite-id-wrapper
+  position: absolute
+  bottom: 5%
+  left: 0
+  text-align: center
+  width: 100%
+
+#invite-id
+  background-color: $color-dark-gray
+  color: $color-light-gray
+  padding: 2% 2% 2% 2%
+  border-radius: 10px

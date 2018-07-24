@@ -1,6 +1,6 @@
 import $ from "jquery";
 import Heart from "../img/heart.png";
-import "../style/style.css";
+import "../style/style.sass";
 
 let PopupSize = 0;
 let CellSize = 0;

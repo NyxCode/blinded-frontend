@@ -2,8 +2,8 @@ import $ from "jquery";
 import io from 'socket.io-client';
 import MobileDetect from "mobile-detect";
 import {PopupSize, CellSize, SmallestViewportUnit, BodyHeight, BodyWidth} from "./ui.js";
-import "../style/style.css"
-import "../style/game.css"
+import "../style/style.sass"
+import "../style/game.sass"
 import "../html/game.html"
 import BlankImage from "../img/blank.gif";
 import CircleAnimation from "../img/circle.gif";

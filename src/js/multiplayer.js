@@ -1,7 +1,7 @@
 import $ from "jquery";
 import {PopupSize, SmallestViewportUnit} from "./ui.js";
-import "../style/style.css"
-import "../style/multiplayer.css"
+import "../style/style.sass"
+import "../style/multiplayer.sass"
 import "../html/multiplayer.html"
 
 $(window).on("window:resize", () => {
