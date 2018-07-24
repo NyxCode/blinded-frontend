@@ -1,6 +1,6 @@
 import $ from "jquery";
 import {PopupSize, SmallestViewportUnit, BodyWidth, BodyHeight} from "./ui.js";
-import "../css/style.css"
+import "../style/style.css"
 import "../html/result.html"
 
 $(document).ready(() => $("#result").append(getResult()));
