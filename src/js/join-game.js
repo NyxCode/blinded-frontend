@@ -4,7 +4,7 @@ import "../css/style.css"
 import "../css/join-game.css"
 import "../html/join-game.html"
 
-$(document).ready(() => $("confirm-button").click(() => {
+$(document).ready(() => $("#confirm-button").click(() => {
     let id = $("#game-id-field").val();
     window.location.href = "{{ links.game }}?mode=multiplayer&id=" + id;
 }));
