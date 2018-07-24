@@ -1,6 +1,5 @@
 import $ from "jquery";
 import "../html/play.html"
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/style.css"
 import "../css/play.css"
 import {PopupSize, SmallestViewportUnit} from "./ui.js";
