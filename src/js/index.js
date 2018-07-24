@@ -6,7 +6,7 @@ import "../css/index.css"
 import "../html/index.html"
 
 $(document).ready(() => {
-    let socket = io("http://blinded.nyxcode.com:9999");
+    let socket = io("{{ links.socket_io_url }}");
     socket.on("connect", () => {
         socket.emit("request-statistics", {}, statistics => {
             console.log("Loaded statistics:", statistics);

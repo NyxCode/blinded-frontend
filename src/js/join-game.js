@@ -6,7 +6,7 @@ import "../html/join-game.html"
 
 $(document).ready(() => $("confirm-button").click(() => {
     let id = $("#game-id-field").val();
-    window.location.href = "game.html?mode=multiplayer&id=" + id;
+    window.location.href = "{{ links.game }}?mode=multiplayer&id=" + id;
 }));
 
 $(window).on("window:resize", () => {

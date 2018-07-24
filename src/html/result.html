@@ -1,4 +1,5 @@
 <!doctype html>
+<!--suppress HtmlUnknownTarget -->
 <html lang="en">
 
 <head>
@@ -7,7 +8,7 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Blinded</title>
+    <title>{{ content.title }}</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -21,11 +22,11 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
         <div class="inner">
-            <h3 class="masthead-brand"><a href="/">Blinded</a></h3>
+            <h3 class="masthead-brand"><a href="{{ links.root }}">{{ content.title }}</a></h3>
             <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="play.html">Play</a>
-                <a class="nav-link" href="index.html">About</a>
-                <a target="_blank" class="nav-link" href="https://github.com/blinded-game">Source</a>
+                <a class="nav-link active" href="{{ links.play }}">Play</a>
+                <a class="nav-link" href="{{ links.root }}">About</a>
+                <a target="_blank" class="nav-link" href="{{ links.source }}">Source</a>
             </nav>
         </div>
     </header>
@@ -33,7 +34,8 @@
     <main role="main" class="inner cover">
         <div id="message" class="popup">
             <p id="result" class="popup-heading"></p>
-            <a href="play.html" id="play-again-btn" class="btn gray-btn btn-lg btn-primary big-button bottom-button">Play
+            <a href="{{ links.play }}" id="play-again-btn"
+               class="btn gray-btn btn-lg btn-primary big-button bottom-button">Play
                 Again</a>
         </div>
     </main>

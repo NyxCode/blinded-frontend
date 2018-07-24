@@ -90,14 +90,14 @@ function createShareButton(gameID) {
     console.log("mobile: ", onMobile);
 
     if (onMobile) {
-        let target = encodeURIComponent("http://blinded.nyxcode.com/game.html?mode=multiplayer&id=" + gameID);
+        let target = encodeURIComponent("{{ links.base_url }}/{{ links.game }}?mode=multiplayer&id=" + gameID);
         let link = "https://wa.me/?text=" + encodeURI("Hey! Are you ready for a game? Try to beat me at ") + target;
         $("#invite-id").click(() => window.open(link));
     }
 }
 
 function main() {
-    establishConnection("blinded.nyxcode.com", 9999, (socket) => {
+    establishConnection((socket) => {
         logIntoGame(socket, (game, thisPlayerID, otherPlayerID) => {
             $("#ttt-matrix").css("display", "grid");
             updateNextTurn(game, thisPlayerID);
@@ -133,7 +133,7 @@ function forEachCell(callback) {
 // Establishes a connection to host:port.
 // callback(socket)
 function establishConnection(host, port, callback) {
-    let socket = io("http://" + host + ":" + port);
+    let socket = io("{{ links.socket_io_url }}");
     socket.on("connect", () => callback(socket));
 }
 
@@ -165,7 +165,7 @@ function logIntoGame(socket, callback) {
             }, (botPlayer) => {
                 if (botPlayer.gameID !== createdGame.id) {
                     handleError("No bot could join your game - please try it again later");
-                    window.location.replace("/multiplayer.html");
+                    window.location.replace("{{ links.multiplayer }}");
                     return;
                 }
                 console.log("received bot: " + JSON.stringify(botPlayer));
@@ -228,7 +228,7 @@ function handleEnemyTurn(turnData, thisPlayerID, game) {
 // Handles a error
 function handleError(errorMessage, exit) {
     alert("An error occurred:\n" + errorMessage);
-    if(exit) {
+    if (exit) {
         window.location.replace("/");
     }
 }
@@ -252,7 +252,7 @@ function endGame(result, game, thisPlayerID, otherPlayerID) {
 
     // Redirect to result page
     setTimeout(() => {
-        window.location.href = "result.html?result=" + result
+        window.location.href = "{{ links.result }}?result=" + result
     }, 2500);
 }
 

@@ -1,0 +1,16 @@
+{
+  "content": {
+    "title": "Blinded"
+  },
+  "links": {
+    "root": "/",
+    "play": "/play",
+    "source": "https://github.com/blinded-game",
+    "join_game": "/join-game",
+    "multiplayer": "/multiplayer",
+    "result": "/result",
+    "game": "/game",
+    "base_url": "http://blinded.nyxcode.com",
+    "socket_io_url": "http://blinded.nyxcode.com:9999"
+  }
+}
