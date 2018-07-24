@@ -130,9 +130,7 @@ function forEachCell(callback) {
     }
 }
 
-// Establishes a connection to host:port.
-// callback(socket)
-function establishConnection(host, port, callback) {
+function establishConnection(callback) {
     let socket = io("{{ links.socket_io_url }}");
     socket.on("connect", () => callback(socket));
 }
