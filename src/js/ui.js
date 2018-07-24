@@ -1,5 +1,6 @@
 import $ from "jquery";
-import "../css/style.css"
+import Heart from "../img/heart.png";
+import "../css/style.css";
 
 let PopupSize = 0;
 let CellSize = 0;
@@ -26,6 +27,11 @@ $(window).on("window:resize", () => {
             console.log("visible now!");
         }, 0);
     }
+});
+
+$(window).ready(() => {
+    $("footer img").attr("src", Heart);
+    console.log("Set heart image!")
 });
 
 $(window).on("load", () => {

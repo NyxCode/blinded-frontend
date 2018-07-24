@@ -23,7 +23,8 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             name(file) {
-                                return file.endsWith(".html") ? "[name].[ext]" : "[hash].[ext]";
+                                let dontUseHash = file.endsWith(".html") || file === "heart.png";
+                                return dontUseHash ? "[name].[ext]" : "[hash].[ext]";
                             }
                         }
                     }
