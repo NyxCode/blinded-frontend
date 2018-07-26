@@ -1,8 +1,8 @@
 import $ from "jquery";
 import io from 'socket.io-client';
 import "./ui.js";
-import "../css/style.css"
-import "../css/index.css"
+import "../style/style.sass"
+import "../style/index.sass"
 import "../html/index.html"
 
 $(document).ready(() => {

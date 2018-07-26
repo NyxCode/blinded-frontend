@@ -1,0 +1,21 @@
+$button-width: 80%
+$button-height: 35%
+$top-bottom-padding: (100% - $button-height * 2) / 3
+
+#get-started
+  .btn
+    position: absolute
+    height: $button-height
+    width: $button-width
+    left: (100% - $button-width) / 2
+
+    /* center label */
+    display: flex
+    justify-content: center
+    flex-direction: column
+
+  #singleplayer-btn
+    top: $top-bottom-padding
+
+  #multiplayer-btn
+    bottom: $top-bottom-padding

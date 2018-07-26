@@ -1,7 +1,7 @@
 import $ from "jquery";
 import {PopupSize, SmallestViewportUnit} from "./ui.js";
-import "../css/style.css"
-import "../css/join-game.css"
+import "../style/style.sass"
+import "../style/join-game.sass"
 import "../html/join-game.html"
 
 $(document).ready(() => $("#confirm-button").click(() => {
