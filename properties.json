@@ -5,7 +5,7 @@
   "links": {
     "root": "/",
     "play": "/play",
-    "source": "https://github.com/blinded-game",
+    "source": "https://github.com/NyxCOde/blinded",
     "join_game": "/join-game",
     "multiplayer": "/multiplayer",
     "result": "/result",
